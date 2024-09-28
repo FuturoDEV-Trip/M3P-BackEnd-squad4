@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "0a2812f2-9b59-43b4-810f-bdc15a98c257",
+		"name": "Viagem365",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33911995"
+	},
+	"item": [
+		{
+			"name": "cadastrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Lucas\",\r\n    \"sexo\": \"masculino\",\r\n    \"cpf\": \"88962154879\",\r\n    \"data_nascimento\": \"1990-10-15\",\r\n    \"endereco\": \"\",\r\n    \"cep\": \"18120000\",\r\n    \"email\": \"teste@gmail.com\",\r\n    \"password\": \"senhadeprova\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"example1@gmail.com\",\r\n    \"password\": \"senha1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar usuario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar usuario",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Rebeca Verissimo\",\r\n    \"sexo\": \"feminino\",\r\n    \"cpf\": \"15487968213\",\r\n    \"data_nascimento\": \"2000-07-24\",\r\n    \"cep\": \"18120000\",\r\n    \"endereco\": \"\",\r\n    \"email\": \"example2@gmail.com\",\r\n    \"password\": \"senha1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/usuarios/70",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"70"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cadastrar destino",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome_do_destino\": \"Praia Canasvieiras\",\r\n    \"descricao\": \"A Praia de Canasvieiras, ou balneário de Canasvieiras, se torna, durante o verão, um dos destinos mais movimentados da ilha. As águas calmas e a infraestrutura da região fazem de Canasvieiras um local para passear em família ou com amigos. É a praia de Florianópolis preferida dos turistas do Cone Sul.\",\r\n    \"localidade\": \"Canasvieiras, Florianópolis, SC.\",\r\n    \"cep\": \"88054040\",\r\n    \"coordenadas_geograficas\": \"\",\r\n    \"usuario_id\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/destinos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"destinos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar destino",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/destinos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"destinos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar um",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/destinos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"destinos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar destino",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome_do_destino\": \"Praia da Joaquina\",\r\n    \"descricao\": \"A Praia da Joaquina ou 'Joaca', como é apelidada pelos moradores, é a praia das 'altas' ondas, geralmente muito frias. No verão, as areias da Joaca se tornam palco de eventos, muitos deles esportivos. O aglomerado de rochas, situado à esquerda, chama a  atenção pelo tamanho das pedras e beleza. Além da praia e do surfe, as dunas também são famosas, consideradas as melhores do sul do país. Lá se criou o sandboard, uma espécie de surfe, mas na areia. Hoje é a atração principal dos que não se arriscam a pegar ondas no mar.\",\r\n    \"localidade\": \"Lagoa da Conceição, Florianópolis - SC\",\r\n    \"cep\": \"88062426\",\r\n    \"usuario_id\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/destinos/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"destinos",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar destino",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Token_Viagem365}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/destinos/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"destinos",
+						"24"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Token_Viagem365",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdGU1QGdtYWlsLmNvbSIsIm5vbWUiOiJFZGRlciIsImlhdCI6MTcxNTIwMzEzMCwiZXhwIjoxNzE1Mjg5NTMwfQ.CFpph3_QeEajMoELBoY-bEGg7X_0jCYYbHjZi_r0gSM"
+		}
+	]
+}

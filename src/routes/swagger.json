@@ -1,0 +1,525 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Viagem365",
+    "description": "API de viagem",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "Token de Autenticação"
+    }
+  },
+  "paths": {
+    "/usuarios/": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cadastrar Usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Adiciona um novo Usuario",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Seu nome"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "feminino, masculino ou outro"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "12345678901"
+                },
+                "data_nascimento": {
+                  "type": "string",
+                  "example": "aaaa-mm-dd"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "seu endereço"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "teste123@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "sua senha"
+                }
+              },
+              "required": [
+                "nome",
+                "sexo",
+                "cpf",
+                "data_nascimento",
+                "cep",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Listar todos os Usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Atualizar dados de um Usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Atualiza dados de um Usuario",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Atualizar nome"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "feminino, masculino ou outro"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "12345678901"
+                },
+                "data_nascimento": {
+                  "type": "string",
+                  "example": "aaaa-mm-dd"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Atualizar seu endereço"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "teste123@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "sua senha"
+                }
+              },
+              "required": [
+                "nome",
+                "sexo",
+                "cpf",
+                "data_nascimento",
+                "cep",
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Deletar um Usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/destinos/": {
+      "post": {
+        "tags": [
+          "Destino"
+        ],
+        "summary": "Adicionar um destino",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Adiciona um Destino",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome_do_destino": {
+                  "type": "string",
+                  "example": "nome do destino"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "descrição"
+                },
+                "localidade": {
+                  "type": "string",
+                  "example": "localidade"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "coordenadas_geograficas": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "nome_do_destino",
+                "descricao",
+                "localidade",
+                "cep"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Destino"
+        ],
+        "summary": "Listar os destinos do usuario activo",
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/destinos/{id}": {
+      "get": {
+        "tags": [
+          "Destino"
+        ],
+        "summary": "Listar destino pelo ID do usuario activo",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Destino"
+        ],
+        "summary": "Atualizar um destino do usuario activo",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Atualiza dados de um Destino",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome_do_destino": {
+                  "type": "string",
+                  "example": "nome do destino"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "descrição"
+                },
+                "localidade": {
+                  "type": "string",
+                  "example": "localidade"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "coordenadas_geograficas": {
+                  "type": "string",
+                  "example": ""
+                }
+              },
+              "required": [
+                "nome_do_destino",
+                "descricao",
+                "localidade",
+                "cep"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Destino"
+        ],
+        "summary": "Deletar um destino do usuario activo",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/login/": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Login do usuario",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Atualiza dados de um Usuario",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "seuemail@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "sua senha"
+                }
+              },
+              "required": [
+                "email",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
+}

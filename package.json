@@ -1,0 +1,38 @@
+{
+  "name": "viagem365",
+  "version": "1.0.0",
+  "description": "Projeto do modulo 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon src/index.js",
+    "swagger": "node ./swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RebecaVerissimo/Viagem365.git"
+  },
+  "author": "Rebeca Verissimo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RebecaVerissimo/Viagem365/issues"
+  },
+  "homepage": "https://github.com/RebecaVerissimo/Viagem365#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "sequelize-cli": "^6.6.2"
+  }
+}
