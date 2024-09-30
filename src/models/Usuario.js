@@ -22,11 +22,11 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.STRING,
     },
     numero: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       
       complemento: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
 
     email:{
