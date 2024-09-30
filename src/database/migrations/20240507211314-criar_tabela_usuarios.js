@@ -37,7 +37,7 @@ module.exports = {
           allowNull: true,          
           type: Sequelize.STRING
         },
-        numero_endereco: {
+        numero: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
@@ -45,11 +45,6 @@ module.exports = {
         complemento: {
           type: Sequelize.STRING,
           allowNull: true,
-        },
-
-        telefone: {
-          type: Sequelize.STRING,
-          allowNull: true
         },
 
         email: {
