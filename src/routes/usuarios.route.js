@@ -7,7 +7,7 @@ const { validarAdicionarUsuario } = require('../middleware/validator')
 const usuarioRoutes = new Router()
 
 usuarioRoutes.post('/', validarAdicionarUsuario, UsuarioController.cadastrar)
-usuarioRoutes.get('/', auth, UsuarioController.listar)
+usuarioRoutes.get('/', UsuarioController.listar)
 usuarioRoutes.put('/:id', auth, validarAdicionarUsuario, UsuarioController.atualizar)
 usuarioRoutes.delete('/:id', auth, UsuarioController.deletar)
 
