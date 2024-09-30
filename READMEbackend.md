@@ -34,6 +34,13 @@ Viagem 365 é uma API que permite administrar destinos de viajem para seus usuar
 ### Para rodar o repositório em ambiente local
 1. `npm run start:dev`
 
+### Para testar a API - Usuários
+1. Bruno - email: `bruno@email.com` ,  senha: `senha123`
+2. Rebeca - email: `example1@gmail.com`, senha: `senha123`
+3. Keeity -  email: `keeity@email.com`, senha: `senha123`
+4. Alana - email: `alana@email.com`,senha: `senha123`
+5. Ingo - email: `ingo@email.com`, senha: `senha123`
+
 ### Documentaçao da API
 
 Acesse ao link `http://localhost:3000/docs/` para observar as rotas diponivéis.

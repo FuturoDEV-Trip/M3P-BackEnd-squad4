@@ -1,10 +1,10 @@
-const { QueryInterface, Sequelize } = require("sequelize");
-const Usuario = require("../../models/Usuario");
+const { queryInterface, Sequelize } = require("sequelize");
 const { hash } = require('bcryptjs')
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-    up: async (QueryInterface, Sequelize) => {
-        await Usuario.bulkCreate([
+    up: async (queryInterface, Sequelize) => {
+        await queryInterface.bulkInsert('usuarios',[
             {
                 nome: "Rebeca Verissimo",
                 sexo: "feminino",
@@ -12,11 +12,12 @@ module.exports = {
                 data_nascimento: "1997-11-13",
                 cep: "88117351",
                 endereco: "Barreiros, São José, Rua Santo Antônio, Santa Catarina, Brasil",
-                numero: 123,
+                numero: "123",
                 complemento: "apartamento 12",
                 email: "example1@gmail.com",
-                password: await hash("senha123", 8)
-            },
+                password: await hash("senha1", 8),
+                createdAt: new Date('2024-05-05'),
+                updatedAt: new Date('2024-05-05')    },
             {
                 nome: "Alana Daniele de Oliveira Carneiro",
                 sexo: "feminino",
@@ -24,10 +25,12 @@ module.exports = {
                 data_nascimento: "1989-07-24",
                 cep: "89117351",
                 endereco: "Barreiros, São José, Rua Santo Antônio, Santa Catarina, Brasil",
-                numero: 123,
+                numero: "123",
                 complemento: "apartamento 12",
                 email: "alana@email.com",
-                password: await hash("senha123", 8)
+                password: await hash("senha123", 8),
+                createdAt: new Date('2024-05-05'),
+                updatedAt: new Date('2024-05-05') 
             },
 
             {
@@ -37,10 +40,12 @@ module.exports = {
                 data_nascimento: "1989-07-24",
                 cep: "88010002",
                 endereco: "Rua Felipe Shimidt, Centro, Florianópolis, Santa Catarina, Brasil",
-                numero: 123,
+                numero: "123",
                 complemento: "casa",
                 email: "ingo@email.com",
-                password: await hash("senha123", 8)
+                password: await hash("senha123", 8),
+                createdAt: new Date('2024-05-05'),
+                updatedAt: new Date('2024-05-05') 
             },
 
             {
@@ -50,10 +55,12 @@ module.exports = {
                 data_nascimento: "1999-07-24",
                 cep: "63505518",
                 endereco: "Rua Ademar Gomes Pereira, Iguatu, Ceará, Brasil",
-                numero: 123,
+                numero: "123",
                 complemento: "apartamento 12",
                 email: "bruno@email.com",
-                password: await hash("senha123", 8)
+                password: await hash("senha123", 8),
+                createdAt: new Date('2024-05-05'),
+                updatedAt: new Date('2024-05-05') 
             },
 
             {
@@ -63,20 +70,27 @@ module.exports = {
                 data_nascimento: "1986-07-24",
                 cep: "88063300",
                 endereco: "Avenida campeche, Campeche, Florianópolis",
-                numero: 123,
-                complemento: casa,
+                numero: "123",
+                complemento: "casa",
                 email: "keeity@email.com",
-                password: await hash("senha123", 8)
+                password: await hash("senha123", 8),
+                createdAt: new Date('2024-05-05'),
+                updatedAt: new Date('2024-05-05') 
             }
         ])
-    },
-
-    down: async (QueryInterface, Sequelize) => {
-        await Usuario.destroy({
-            email: [
-                "example1@gmail.com", 
-                "example2@gmail.com"
-            ] 
-        })
     }
 }
+
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.bulkDelete('usuarios', {
+            email: [
+                "example1@gmail.com", 
+                "alana@email.com",
+                "keeity@email.com",
+                "bruno@email.com",
+                "ingo@email.com",
+                
+
+            ] 
+        });
+    };
