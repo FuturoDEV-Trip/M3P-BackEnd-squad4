@@ -31,6 +31,8 @@ class UsuarioController {
             const data_nascimento = req.body.data_nascimento
             const cep = req.body.cep
             let endereco = req.body.endereco
+            const numero = req.body.numero
+            const complemento = req.body.complemento
             const email = req.body.email
             const password = req.body.password
                                 
@@ -49,6 +51,8 @@ class UsuarioController {
                 data_nascimento: data_nascimento,
                 cep: cep,
                 endereco: endereco,
+                numero: numero,
+                complemento: complemento,
                 email: email,
                 password: password
             })

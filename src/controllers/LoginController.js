@@ -49,7 +49,7 @@ class LoginController {
                 expiresIn: '24h'
             })
 
-            res.status(200).json({ Token: token })
+            res.status(200).json({ Token: token, user: usuario })
 
         } catch (error) {
             console.log(error)

@@ -21,6 +21,14 @@ const Usuario = connection.define('usuarios', {
     endereco: {
         type: DataTypes.STRING,
     },
+    numero: {
+        type: DataTypes.INTEGER,
+      },
+      
+      complemento: {
+        type: DataTypes.STRING,
+      },
+
     email:{
         type: DataTypes.STRING,
     },
