@@ -21,6 +21,14 @@ const Usuario = connection.define('usuarios', {
     endereco: {
         type: DataTypes.STRING,
     },
+    numero: {
+        type: Sequelize.INTEGER,
+      },
+      
+      complemento: {
+        type: Sequelize.STRING,
+      },
+
     email:{
         type: DataTypes.STRING,
     },
