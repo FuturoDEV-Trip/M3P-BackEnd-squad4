@@ -5,7 +5,7 @@ const doc = {
     title: 'TripFlow',
     description: 'API de viagem'
   },
-  host: '0.0.0.0:3000',
+  host: 'localhost:3000',
   security: [{"apiKeyAuth": []}],
   securityDefinitions: {
     apiKeyAuth: {

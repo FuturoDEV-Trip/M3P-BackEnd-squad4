@@ -14,10 +14,11 @@ module.exports = {
                 endereco: "Barreiros, São José, Rua Santo Antônio, Santa Catarina, Brasil",
                 numero: "123",
                 complemento: "apartamento 12",
-                email: "example1@gmail.com",
-                password: await hash("senha1", 8),
+                email: "rebeca@email.com",
+                password: await hash("senha123", 8),
                 createdAt: new Date('2024-05-05'),
-                updatedAt: new Date('2024-05-05')    },
+                updatedAt: new Date('2024-05-05')
+            },
             {
                 nome: "Alana Daniele de Oliveira Carneiro",
                 sexo: "feminino",
@@ -84,13 +85,11 @@ module.exports = {
     down: async (queryInterface, Sequelize) => {
         await queryInterface.bulkDelete('usuarios', {
             email: [
-                "example1@gmail.com", 
+                "rebeca@email.com", 
                 "alana@email.com",
                 "keeity@email.com",
                 "bruno@email.com",
-                "ingo@email.com",
-                
-
+                "ingo@email.com",            
             ] 
         });
     };
