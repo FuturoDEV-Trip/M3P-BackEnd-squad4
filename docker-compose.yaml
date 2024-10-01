@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - mynet
+    depends_on:
+      - db
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: TripFlow
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - mynet
+
+volumes:
+  db-data:
+networks:
+  mynet:
