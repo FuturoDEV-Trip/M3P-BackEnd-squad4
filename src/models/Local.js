@@ -52,6 +52,5 @@ Usuario.hasMany(Local, {
     onUpdate: 'CASCADE',
     onDelete: 'RESTRICT'
 })
-Local.belongsTo(Usuario)
 
 module.exports = Local

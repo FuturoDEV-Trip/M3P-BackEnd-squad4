@@ -33,19 +33,19 @@ const validarAdicionarUsuario = async (req, res, next) => {
     }
 };
 
-const schemaAdicionarDestino = yup.object().shape({
-  nome_do_destino: yup.string().required(),
+const schemaAdicionarLocal = yup.object().shape({
+  nome: yup.string().required(),
   descricao: yup.string().required(),
   localidade: yup.string().required(),
   cep: yup.string().matches(/\d{8}/, "O CEP deve conter 8 dígitos sem pontos nem traços").required(),
   coordenadas_geograficas: yup.string(),
 });
 
-const validarAdicionarDestino = async (req, res, next) => {
+const validarAdicionarLocal = async (req, res, next) => {
   const { body } = req;
 
   try {
-    await schemaAdicionarDestino.validate(body, { abortEarly: false });
+    await schemaAdicionarLocal.validate(body, { abortEarly: false });
     next(); 
   } catch (erro) {
     res.status(400).json({ erro: erro.errors });
@@ -53,4 +53,4 @@ const validarAdicionarDestino = async (req, res, next) => {
 };
 
 
-module.exports = { validarAdicionarUsuario, validarAdicionarDestino }
+module.exports = { validarAdicionarUsuario, validarAdicionarLocal }

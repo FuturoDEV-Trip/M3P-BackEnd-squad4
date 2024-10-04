@@ -1,4 +1,4 @@
-const Destino = require('../models/Destino')
+const Local = require('../models/Local')
 const Usuario = require('../models/Usuario')
 
 const { openStreetMap } = require('../service/map.service')
@@ -19,8 +19,10 @@ class UsuarioController {
                     $data_nascimento: "aaaa-mm-dd",
                     $cep: "12345678",
                     endereco: "seu endereço",
+                    $numero: 000,
+                    $complemento: "# do seu apartamento",
                     $email: "teste123@gmail.com",
-                    $password: "sua senha"                    
+                    $password: "sua senha",                    
             }
         }
     */
@@ -99,8 +101,10 @@ class UsuarioController {
                     $data_nascimento: "aaaa-mm-dd",
                     $cep: "12345678",
                     endereco: "Atualizar seu endereço",
+                    $numero: 000,
+                    $complemento: "# do seu apartamento",
                     $email: "teste123@gmail.com",
-                    $password: "sua senha"                    
+                    $password: "sua senha",                    
             }
         }
     */
@@ -141,14 +145,14 @@ class UsuarioController {
             if(!usuario){
                 return res.status(404).json({message: 'Usuario não encontrado'})
             }
-            const count = await Destino.count({         //Não pode ser deletado um usuario se tem algum destino associado
+            const count = await Local.count({         //Não pode ser deletado um usuario se tem algum local associado
                 where: {
                 usuario_id: id
                 }
             })
 
             if (count > 0){
-                return res.status(400).json({message: 'Não é possível deletar este usuario porque tem destinos associados'})
+                return res.status(400).json({message: 'Não é possível deletar este usuario porque tem locais associados'})
             }
 
             usuario.destroy({
