@@ -27,12 +27,8 @@ class DestinoController {
             const descricao = req.body.descricao
             const localidade = req.body.localidade
             const cep = req.body.cep
-            let coordenadas_geograficas = ""
+            let coordenadas_geograficas = req.body.coordenadas_geograficas
                             
-                    
-            const resposta = await getCepCoordinates(cep)
-                  console.log(resposta)
-                  coordenadas_geograficas = JSON.stringify(resposta) //Converte um objeto javascript em um json string. Devido a que um objeto viola as restrições de uma string no banco de dados 
        
             const destino = await Destino.create({   
                 usuario_id: usuario_id,             
@@ -49,7 +45,7 @@ class DestinoController {
         } catch (error){
             console.log(error.message)
 
-            return res.status(500).json({message: "Não foi possivel cadastrar o usuario"})
+            return res.status(500).json({message: "Não foi possivel cadastrar o destino"})
         }
     }
 
