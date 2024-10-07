@@ -87,6 +87,32 @@ class UsuarioController {
         }
     }
 
+
+    async listarUm(req, res){
+        try{
+            /*  
+            #swagger.tags = ['Usuario'],
+            #swagger.summary = 'Listar usuário pelo ID'
+                #swagger.parameters['id'] = {
+            in: 'path',
+            required: true,
+          description: 'Informe o ID do Usuário. Ex: 1',
+            required: true
+        */
+            const { id } = req.params
+            const usuario = await Usuario.findByPk(id)
+            if (!usuario) {
+                return res.status(404).json({ message: "Usuário não encontrado!" })
+            }
+               res.status(200).json(usuario)           
+
+        } catch (error) {
+            console.error(`Erro ao buscar usuario: ${error}`);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+          }
+        }
+
+
     async atualizar(req,res) {
         /*  
             #swagger.tags = ['Usuario'],
