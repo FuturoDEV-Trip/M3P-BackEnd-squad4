@@ -21,6 +21,8 @@ services:
       - db-data:/var/lib/postgresql/data
     networks:
       - mynet
+    ports:
+      - "5435:5432"
 
 volumes:
   db-data:

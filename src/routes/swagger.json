@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Viagem365",
+    "title": "TripFlow",
     "description": "API de viagem",
     "version": "1.0.0"
   },
@@ -58,6 +58,14 @@
                   "type": "string",
                   "example": "seu endereço"
                 },
+                "numero": {
+                  "type": "number",
+                  "example": 0
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": "# do seu apartamento"
+                },
                 "email": {
                   "type": "string",
                   "example": "teste123@gmail.com"
@@ -73,6 +81,8 @@
                 "cpf",
                 "data_nascimento",
                 "cep",
+                "numero",
+                "complemento",
                 "email",
                 "password"
               ]
@@ -97,19 +107,9 @@
         ],
         "summary": "Listar todos os Usuario",
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -167,6 +167,14 @@
                   "type": "string",
                   "example": "Atualizar seu endereço"
                 },
+                "numero": {
+                  "type": "number",
+                  "example": 0
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": "# do seu apartamento"
+                },
                 "email": {
                   "type": "string",
                   "example": "teste123@gmail.com"
@@ -182,6 +190,8 @@
                 "cpf",
                 "data_nascimento",
                 "cep",
+                "numero",
+                "complemento",
                 "email",
                 "password"
               ]
@@ -241,12 +251,27 @@
         }
       }
     },
-    "/destinos/": {
+    "/locais/": {
+      "get": {
+        "tags": [
+          "Local"
+        ],
+        "summary": "Listar os locais existentes",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
         "tags": [
-          "Destino"
+          "Local"
         ],
-        "summary": "Adicionar um destino",
+        "summary": "Adicionar um local",
         "description": "",
         "parameters": [
           {
@@ -257,13 +282,13 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Adiciona um Destino",
+            "description": "Adiciona um Local",
             "schema": {
               "type": "object",
               "properties": {
-                "nome_do_destino": {
+                "nome": {
                   "type": "string",
-                  "example": "nome do destino"
+                  "example": "nome do local"
                 },
                 "descricao": {
                   "type": "string",
@@ -283,7 +308,7 @@
                 }
               },
               "required": [
-                "nome_do_destino",
+                "nome",
                 "descricao",
                 "localidade",
                 "cep"
@@ -305,70 +330,41 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "Destino"
-        ],
-        "summary": "Listar os destinos do usuario activo",
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       }
     },
-    "/destinos/{id}": {
+    "/locais/{id}": {
       "get": {
         "tags": [
-          "Destino"
+          "Local"
         ],
-        "summary": "Listar destino pelo ID do usuario activo",
+        "summary": "Listar local pelo ID do usuario activo",
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "Informe o ID do local. Ex: 1"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
         "tags": [
-          "Destino"
+          "Local"
         ],
-        "summary": "Atualizar um destino do usuario activo",
+        "summary": "Atualizar um local do usuario activo",
         "description": "",
         "parameters": [
           {
@@ -385,13 +381,13 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Atualiza dados de um Destino",
+            "description": "Atualiza dados de um Local",
             "schema": {
               "type": "object",
               "properties": {
-                "nome_do_destino": {
+                "nome": {
                   "type": "string",
-                  "example": "nome do destino"
+                  "example": "nome do local"
                 },
                 "descricao": {
                   "type": "string",
@@ -411,7 +407,7 @@
                 }
               },
               "required": [
-                "nome_do_destino",
+                "nome",
                 "descricao",
                 "localidade",
                 "cep"
@@ -436,9 +432,9 @@
       },
       "delete": {
         "tags": [
-          "Destino"
+          "Local"
         ],
-        "summary": "Deletar um destino do usuario activo",
+        "summary": "Deletar um local do usuario activo",
         "description": "",
         "parameters": [
           {

@@ -1,12 +1,12 @@
 const { QueryInterface, Sequelize } = require("sequelize");
-const Destino = require("../../models/Destino");
+const Local = require("../../models/Local");
 
 module.exports = {
     up: async (QueryInterface, Sequelize) => {
-        await Destino.bulkCreate([
+        await Local.bulkCreate([
             {
                 usuario_id: "1",             
-                nome_do_destino: "Praia da Joaquina",
+                nome: "Praia da Joaquina",
                 descricao: `A Praia da Joaquina ou 'Joaca', como é apelidada pelos moradores, é a praia 
                 das 'altas' ondas, geralmente muito frias. No verão, as areias da Joaca se tornam palco 
                 de eventos, muitos deles esportivos. O aglomerado de rochas, situado à esquerda, chama a 
@@ -20,7 +20,7 @@ module.exports = {
             },
             {
                 usuario_id: "1",             
-                nome_do_destino: "Fundação Projeto TAMAR ",
+                nome: "Fundação Projeto TAMAR ",
                 descricao: `A Fundação Projeto TAMAR trabalha na conscientização e educação ambiental de 
                 visitantes, comunidades e pescadores. O Centro de Visitantes de Florianópolis conta com 
                 infraestrutura que inclui cinco tanques de observação com exemplares de quatro das cinco 
@@ -32,7 +32,7 @@ module.exports = {
             },
             {
                 usuario_id: "2",             
-                nome_do_destino: "Praia Daniela",
+                nome: "Praia Daniela",
                 descricao: `Praia da Daniela é uma mini-península - uma ponta de areia com vegetação - 
                 que se estende para o mar, avançando sobre as águas. Uma comunidade onde residências de 
                 luxo se misturam com casas tradicionais e que conserva a tranquilidade de quem procura 
@@ -44,7 +44,7 @@ module.exports = {
             },
             {
                 usuario_id: "2",             
-                nome_do_destino: "Morro da Coroa",
+                nome: "Morro da Coroa",
                 descricao: `É um mirante natural que é acessado apenas por trilha ou barco, esse paraíso 
                 é realmente um dos pontos mais belos do litoral catarinense e brasileiro. As rochas 
                 dispostas no alto do morro são responsáveis pelo seu nome, já que estão dispostas de uma 
@@ -58,7 +58,7 @@ module.exports = {
     },
 
     down: async (QueryInterface, Sequelize) => {
-        await Destino.destroy({
+        await Local.destroy({
             usuario_id: [
                 "1", 
                 "2"
