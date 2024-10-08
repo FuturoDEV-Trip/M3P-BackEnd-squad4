@@ -74,6 +74,27 @@ class LocalController {
         }
     }
 
+    async listarMeusLocais(req, res) {
+        /*  
+            #swagger.tags = ['Local'],
+            #swagger.summary = 'Listar os locais do usuario activo'
+        */
+        try {
+            const usuario_id = req.payload.sub
+            const locais = await Local.findAll({
+                where: {usuario_id:usuario_id},        //Somente o proprietário do destino pode listar seus destinos
+                order: [['id', 'ASC']]})
+    
+            locais.forEach(local => {
+                local.coordenadas_geograficas = JSON.parse(local.coordenadas_geograficas)   //Converte um json recebido como string em um objeto javascript
+            })
+                
+            return res.json(locais)
+        } catch (error) {
+            return res.status(500).json({message: 'Não possível listar os destinos' })
+        }
+    }
+
     async listarUm(req, res){
         try{
             /*  
