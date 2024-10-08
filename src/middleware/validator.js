@@ -37,7 +37,7 @@ const schemaAdicionarLocal = yup.object().shape({
   nome: yup.string().required(),
   descricao: yup.string().required(),
   localidade: yup.string().required(),
-  cep: yup.string().matches(/\d{8}/, "O CEP deve conter 8 dígitos sem pontos nem traços").required(),
+  cep: yup.string().notRequired().matches(/\d{8}/, "O CEP deve conter 8 dígitos sem pontos nem traços"),
   coordenadas_geograficas: yup.string(),
 });
 
