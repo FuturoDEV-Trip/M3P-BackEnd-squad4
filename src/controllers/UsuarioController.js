@@ -39,11 +39,11 @@ class UsuarioController {
             const password = req.body.password
                                 
                                     
-            if(!endereco) {
-                const resposta = await openStreetMap(cep)
-                console.log(resposta)
-                endereco = resposta.display_name                
-            }                       
+            // if(!endereco) {
+            //     const resposta = await openStreetMap(cep)
+            //     console.log(resposta)
+            //     endereco = resposta.display_name                
+            // }                       
         
                 
             const usuario = await Usuario.create({                
