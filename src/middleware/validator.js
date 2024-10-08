@@ -33,6 +33,27 @@ const validarAdicionarUsuario = async (req, res, next) => {
     }
 };
 
+const schemaEditarUsuario = yup.object().shape({
+  nome: yup.string().required(),
+  sexo: yup.mixed().oneOf(['feminino', 'masculino','outro']).required(),
+  data_nascimento: yup.date().typeError('A data de nascimento não está no formato correto (aaaa-mm-dd)').required(),
+  cep: yup.string().matches(/\d{8}/, "O CEP deve conter 8 dígitos sem pontos nem traços").required(),
+  endereco: yup.string(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+const validarEditarUsuario = async (req, res, next) => {
+  const { body } = req;
+
+  try {
+    await schemaEditarUsuario.validate(body, { abortEarly: false });
+    next(); 
+  } catch (erro) {
+    res.status(400).json({ erro: erro.errors });
+  }
+};
+
 const schemaAdicionarLocal = yup.object().shape({
   nome: yup.string().required(),
   descricao: yup.string().required(),
@@ -53,4 +74,4 @@ const validarAdicionarLocal = async (req, res, next) => {
 };
 
 
-module.exports = { validarAdicionarUsuario, validarAdicionarLocal }
+module.exports = { validarAdicionarUsuario, validarAdicionarLocal, validarEditarUsuario }

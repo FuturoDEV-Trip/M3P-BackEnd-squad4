@@ -61,7 +61,8 @@ const Usuario = connection.define('usuarios', {
 })
 
 Usuario.beforeSave(async (usuario) => {
-    usuario.password = await hash(usuario.password, 8) 
+    usuario.password = await hash(usuario.password, 8);
+    usuario.cpf = await hash(usuario.cpf, 8) 
     return usuario
 })
 
