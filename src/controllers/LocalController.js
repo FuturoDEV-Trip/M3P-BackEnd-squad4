@@ -68,9 +68,9 @@ class LocalController {
                 local.coordenadas_geograficas = JSON.parse(local.coordenadas_geograficas)   //Converte um json recebido como string em um objeto javascript
             })
                 
-            res.json(locais)
+            return res.json(locais)
         } catch (error) {
-            res.status(500).json({message: 'Não possível listar os locais' })
+            return res.status(500).json({message: 'Não possível listar os locais' })
         }
     }
 
@@ -126,16 +126,16 @@ class LocalController {
             newData.usuario_id = req.payload.sub
 
             try{
-                if(local.cep != newData.cep) {
-                    const resposta = await getCepCoordinates(newData.cep)
-                    console.log(resposta)
-                    newData.coordenadas_geograficas = JSON.stringify(resposta)                                  
-                }  
+                // if(local.cep != newData.cep) {
+                //     const resposta = await getCepCoordinates(newData.cep)
+                //     console.log(resposta)
+                //     newData.coordenadas_geograficas = JSON.stringify(resposta)                                  
+                // }  
     
                 const newLocal = await local.update(newData, {where:{id:id}})
 
                 newLocal.coordenadas_geograficas = JSON.parse(newLocal.coordenadas_geograficas) //Converte um json recebido como string em um objeto javascript
-                res.status(200).json(newLocal)  
+                return res.status(200).json(newLocal)  
                 
             } catch (error){
                 console.log(error.message)
