@@ -26,12 +26,12 @@ class LocalController {
             const descricao = req.body.descricao
             const localidade = req.body.localidade
             const cep = req.body.cep
-            let coordenadas_geograficas = ""
+            let coordenadas_geograficas = req.body.coordenadas_geograficas
                             
-                    
-            const resposta = await getCepCoordinates(cep)
-                  console.log(resposta)
-                  coordenadas_geograficas = JSON.stringify(resposta) //Converte um objeto javascript em um json string. Devido a que um objeto viola as restrições de uma string no banco de dados 
+                    // retirado para não fazer duas chamadas API
+            // const resposta = await getCepCoordinates(cep)
+            //       console.log(resposta)
+            //       coordenadas_geograficas = JSON.stringify(resposta) 
        
             const local = await Local.create({   
                 usuario_id: usuario_id,             
@@ -50,7 +50,7 @@ class LocalController {
             if (error.message.includes('CEP'))
             return res.status(400).json({message: error.message})
 
-            return res.status(500).json({message: "Não foi possivel cadastrar o usuario"})
+            return res.status(500).json({message: "Não foi possivel cadastrar o destino"})
         }
     }
 
