@@ -122,7 +122,6 @@ class UsuarioController {
                 schema: {
                     $nome: "Atualizar nome",
                     $sexo: "feminino, masculino ou outro",
-                    $cpf: "12345678901",
                     $data_nascimento: "aaaa-mm-dd",
                     $cep: "12345678",
                     endereco: "Atualizar seu endereço",
@@ -133,23 +132,24 @@ class UsuarioController {
             }
         }
     */
-        const { id } = req.params
+        const usuario_id = req.payload.sub
         const newData = req.body
+        delete newData["cpf"]  //Para não editar o cpf
 
-        let usuario = await Usuario.findByPk(id)
+        let usuario = await Usuario.findByPk(usuario_id)
         if (!usuario){
             return res.status(404).json({message: 'Usuario não encontrado'})
         }
 
         try{
-            if(usuario.cep != newData.cep && !newData.endereco) {
-                const resposta = await openStreetMap(newData.cep)
-                console.log(resposta)
-                newData.endereco = resposta.display_name                
-            }  
+            // if(usuario.cep != newData.cep && !newData.endereco) {
+            //     const resposta = await openStreetMap(newData.cep)
+            //     console.log(resposta)
+            //     newData.endereco = resposta.display_name                
+            // }  
 
-            await usuario.update(newData, {where:{id:id}})
-            res.status(200).json(usuario)  
+            await usuario.update(newData, {where:{id:usuario_id}})
+            return res.status(200).json(usuario)  
             
         } catch (error){
             console.log(error.message)
