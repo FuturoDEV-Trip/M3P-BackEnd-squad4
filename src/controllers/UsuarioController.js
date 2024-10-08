@@ -93,11 +93,10 @@ class UsuarioController {
             /*  
             #swagger.tags = ['Usuario'],
             #swagger.summary = 'Listar usuário pelo ID'
-                #swagger.parameters['id'] = {
-            in: 'path',
-            required: true,
-          description: 'Informe o ID do Usuário. Ex: 1',
-            required: true
+            #swagger.parameters['id'] = {
+                in: 'path',
+                required: true,
+                description: 'Informe o ID do Usuário. Ex: 1'}
         */
             const { id } = req.params
             const usuario = await Usuario.findByPk(id)
