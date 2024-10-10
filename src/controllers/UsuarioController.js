@@ -217,9 +217,13 @@ class UsuarioController {
                     const usuariosAtivos = await Usuario.findAll({
                         where: { isLogged: true },
                         order: [['id', 'ASC']]})
-                    res.json(usuariosAtivos)
+                        if (usuariosAtivos.length === 0) {
+                            return res.status(200).json({ message: 'Nenhum usuário ativo encontrado.' });
+                        }
+                 res.json(usuariosAtivos)
                 } catch (error) {
-                    res.status(500).json({message: 'Não possível listar os usuarios ativos' })
+                    console.error(error);
+                      res.status(500).json({message: 'Não possível listar os usuarios ativos' })
                 }
             }           
 
