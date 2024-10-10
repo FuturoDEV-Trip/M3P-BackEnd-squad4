@@ -11,5 +11,7 @@ usuarioRoutes.get('/', UsuarioController.listar)
 usuarioRoutes.put('/', auth, validarEditarUsuario, UsuarioController.atualizar)
 usuarioRoutes.delete('/:id', auth, UsuarioController.deletar)
 usuarioRoutes.get('/:id', UsuarioController.listarUm)
+usuarioRoutes.post('/logout' , UsuarioController.desconectar)
+usuarioRoutes.get('/logado' , UsuarioController.listarAtivos)
 
 module.exports = usuarioRoutes

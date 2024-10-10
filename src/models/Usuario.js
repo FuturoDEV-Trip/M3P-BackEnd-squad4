@@ -55,6 +55,10 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.DATE,
         defaultValue: Date.now()
     },
+    isLogged: { 
+        type: DataTypes.BOOLEAN,
+        defaultValue: false, 
+    },
     updatedAt: {
         type: DataTypes.DATE
     } 

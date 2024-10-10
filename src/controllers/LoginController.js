@@ -43,6 +43,8 @@ class LoginController {
                 return res.status(403).json({message: 'Usuario não encontrado'})
             }
 
+            await Usuario.update({ isLogged: true }, { where: { id: usuario.id } });
+
             const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
 
             const token = sign(payload, process.env.SECRET_JWT, {

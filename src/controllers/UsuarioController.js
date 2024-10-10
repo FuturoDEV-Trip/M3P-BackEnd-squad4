@@ -193,6 +193,35 @@ class UsuarioController {
         }        
     }
 
+    async desconectar(req, res) {
+        /*  
+            #swagger.tags = ['Usuario']               
+        */
+                const { userId } = req.body;
+            
+                try {
+                    await Usuario.update({ isLogged: false }, { where: { id: userId } });
+                    return res.status(200).json({ message: "Deslogado com sucesso" });
+                } catch (error) {
+                    console.error("Erro ao deslogar", error);
+                    return res.status(500).json({ message: "Erro interno do servidor" });
+                }
+            }
+
+            async listarAtivos(req, res) {
+                /*  
+                    #swagger.tags = ['Usuario'],
+                    #swagger.summary = 'Listar todos os Usuarios Ativos'                
+                */
+                try {
+                    const usuariosAtivos = await Usuario.findAll({
+                        where: { isLogged: true },
+                        order: [['id', 'ASC']]})
+                    res.json(usuariosAtivos)
+                } catch (error) {
+                    res.status(500).json({message: 'Não possível listar os usuarios ativos' })
+                }
+            }           
 
 }
 
