@@ -8,10 +8,22 @@ module.exports = {
   password: process.env.PASSWORDDB,
   database: process.env.DATABASE,
   port: process.env.PORT || 5432,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true,
-  //     rejectUnauthorized: false
-  //   }
-  // }
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: true
+    }
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  define: {
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true
+  },
+  logging: false
 };
