@@ -10,8 +10,8 @@ module.exports = {
   port: process.env.PORT || 5432,
   dialectOptions: {
     ssl: {
-      require: true,
-      rejectUnauthorized: true
+      rejectUnauthorized: true,
+      require: true
     }
   },
   pool: {
@@ -19,11 +19,5 @@ module.exports = {
     min: 0,
     acquire: 30000,
     idle: 10000
-  },
-  define: {
-    timestamps: true,
-    underscored: true,
-    underscoredAll: true
-  },
-  logging: false
+  }
 };
