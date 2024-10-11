@@ -1,19 +1,8 @@
 const { Sequelize } = require('sequelize');
 const databaseConfig = require('../config/database.config');
 
-const connection = new Sequelize(
-    databaseConfig.database,        // Nome do banco de dados
-    databaseConfig.username,        // Nome de usuário
-    databaseConfig.password,        // Senha do banco de dados
-    {
-        host: databaseConfig.host,    // Host do banco de dados
-        dialect: databaseConfig.dialect, // Dialeto (ex: 'mysql', 'postgres', etc.)
-        port: databaseConfig.port,    // Porta do banco de dados
-        logging: false                // Desabilita o logging para evitar poluição dos logs
-    }
-);
+const connection = new Sequelize(databaseConfig);
 
-// Teste de conexão
 async function testConnection() {
     try {
         await connection.authenticate();
