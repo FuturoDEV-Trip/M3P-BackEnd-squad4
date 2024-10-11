@@ -3,7 +3,7 @@ const cors = require('cors') // Biblioteca utilizada para inserir headers http
 const { connection } = require('./database/connection') // Configuração de acesso ao banco de dados
 const routes = require('./routes/routes')
 
-const PORT_API = process.env.PORT_API || 3000 // Porta do servidor
+const PORT_API = process.env.PORT_API || 10000 // Porta do servidor
 
 class Server {
 
