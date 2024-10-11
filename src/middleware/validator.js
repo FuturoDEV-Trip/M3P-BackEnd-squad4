@@ -33,19 +33,40 @@ const validarAdicionarUsuario = async (req, res, next) => {
     }
 };
 
-const schemaAdicionarDestino = yup.object().shape({
-  nome_do_destino: yup.string().required(),
-  descricao: yup.string().required(),
-  localidade: yup.string().required(),
+const schemaEditarUsuario = yup.object().shape({
+  nome: yup.string().required(),
+  sexo: yup.mixed().oneOf(['feminino', 'masculino','outro']).required(),
+  data_nascimento: yup.date().typeError('A data de nascimento não está no formato correto (aaaa-mm-dd)').required(),
   cep: yup.string().matches(/\d{8}/, "O CEP deve conter 8 dígitos sem pontos nem traços").required(),
-  coordenadas_geograficas: yup.string(),
+  endereco: yup.string(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
 });
 
-const validarAdicionarDestino = async (req, res, next) => {
+const validarEditarUsuario = async (req, res, next) => {
   const { body } = req;
 
   try {
-    await schemaAdicionarDestino.validate(body, { abortEarly: false });
+    await schemaEditarUsuario.validate(body, { abortEarly: false });
+    next(); 
+  } catch (erro) {
+    res.status(400).json({ erro: erro.errors });
+  }
+};
+
+const schemaAdicionarLocal = yup.object().shape({
+  nome: yup.string().required(),
+  descricao: yup.string().required(),
+  localidade: yup.string().required(),
+  cep: yup.string().matches(/^$|^\d{8}$/, "O CEP deve conter 8 dígitos sem pontos nem traços").notRequired(),
+  coordenadas_geograficas: yup.string(),
+});
+
+const validarAdicionarLocal = async (req, res, next) => {
+  const { body } = req;
+
+  try {
+    await schemaAdicionarLocal.validate(body, { abortEarly: false });
     next(); 
   } catch (erro) {
     res.status(400).json({ erro: erro.errors });
@@ -53,4 +74,4 @@ const validarAdicionarDestino = async (req, res, next) => {
 };
 
 
-module.exports = { validarAdicionarUsuario, validarAdicionarDestino }
+module.exports = { validarAdicionarUsuario, validarAdicionarLocal, validarEditarUsuario }

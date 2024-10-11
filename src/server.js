@@ -20,15 +20,29 @@ class Server {
     app.use(express.json()) // Habilitar entrada de dados como json no servidor
   }
 
-  async database() {
-    try {
-      await connection.authenticate(); // Tentativa de conexão com o banco de dados
-      console.log('Conexão bem sucedida!');
-    } catch (error) {
-      console.error('Não foi possível conectar no banco de dados.', error);
-      throw error
+  async database(maxRetries = 5) {
+    let retries = 0;
+  
+    while (retries < maxRetries) {
+      try {
+        await connection.authenticate(); // Intento de conexión a la base de datos
+        console.log('Conexão bem sucedida!');
+        break; // Si la conexión es exitosa, rompe el bucle
+      } catch (error) {
+        retries++;
+        console.error(`Tentativa ${retries}: Não foi possível conectar ao banco de dados.`, error);
+  
+        if (retries >= maxRetries) {
+          console.error('Número máximo de tentativas alcançado. Falha ao conectar.');
+          throw error; // Lanza el error después de alcanzar el número máximo de reintentos
+        }
+  
+        console.log(`Reintentando em 3 segundos...`);
+        await new Promise(resolve => setTimeout(resolve, 3000)); // Espera 3 segundos antes del próximo intento
+      }
     }
   }
+  
 
   async initializeServer(app) {
     // Valor da porta do servidor

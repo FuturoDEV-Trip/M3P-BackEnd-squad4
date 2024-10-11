@@ -1,4 +1,4 @@
-const Destino = require('../models/Destino')
+const Local = require('../models/Local')
 const Usuario = require('../models/Usuario')
 
 const { openStreetMap } = require('../service/map.service')
@@ -19,8 +19,10 @@ class UsuarioController {
                     $data_nascimento: "aaaa-mm-dd",
                     $cep: "12345678",
                     endereco: "seu endereço",
+                    $numero: 000,
+                    $complemento: "# do seu apartamento",
                     $email: "teste123@gmail.com",
-                    $password: "sua senha"                    
+                    $password: "sua senha",                    
             }
         }
     */
@@ -31,15 +33,17 @@ class UsuarioController {
             const data_nascimento = req.body.data_nascimento
             const cep = req.body.cep
             let endereco = req.body.endereco
+            const numero = req.body.numero
+            const complemento = req.body.complemento
             const email = req.body.email
             const password = req.body.password
                                 
                                     
-            if(!endereco) {
-                const resposta = await openStreetMap(cep)
-                console.log(resposta)
-                endereco = resposta.display_name                
-            }                       
+            // if(!endereco) {
+            //     const resposta = await openStreetMap(cep)
+            //     console.log(resposta)
+            //     endereco = resposta.display_name                
+            // }                       
         
                 
             const usuario = await Usuario.create({                
@@ -49,6 +53,8 @@ class UsuarioController {
                 data_nascimento: data_nascimento,
                 cep: cep,
                 endereco: endereco,
+                numero: numero,
+                complemento: complemento,
                 email: email,
                 password: password
             })
@@ -81,6 +87,31 @@ class UsuarioController {
         }
     }
 
+
+    async listarUm(req, res){
+        try{
+            /*  
+            #swagger.tags = ['Usuario'],
+            #swagger.summary = 'Listar usuário pelo ID'
+            #swagger.parameters['id'] = {
+                in: 'path',
+                required: true,
+                description: 'Informe o ID do Usuário. Ex: 1'}
+        */
+            const { id } = req.params
+            const usuario = await Usuario.findByPk(id)
+            if (!usuario) {
+                return res.status(404).json({ message: "Usuário não encontrado!" })
+            }
+               res.status(200).json(usuario)           
+
+        } catch (error) {
+            console.error(`Erro ao buscar usuario: ${error}`);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+          }
+        }
+
+
     async atualizar(req,res) {
         /*  
             #swagger.tags = ['Usuario'],
@@ -91,32 +122,34 @@ class UsuarioController {
                 schema: {
                     $nome: "Atualizar nome",
                     $sexo: "feminino, masculino ou outro",
-                    $cpf: "12345678901",
                     $data_nascimento: "aaaa-mm-dd",
                     $cep: "12345678",
                     endereco: "Atualizar seu endereço",
+                    $numero: 000,
+                    $complemento: "# do seu apartamento",
                     $email: "teste123@gmail.com",
-                    $password: "sua senha"                    
+                    $password: "sua senha",                    
             }
         }
     */
-        const { id } = req.params
+        const usuario_id = req.payload.sub
         const newData = req.body
+        delete newData["cpf"]  //Para não editar o cpf
 
-        let usuario = await Usuario.findByPk(id)
+        let usuario = await Usuario.findByPk(usuario_id)
         if (!usuario){
             return res.status(404).json({message: 'Usuario não encontrado'})
         }
 
         try{
-            if(usuario.cep != newData.cep && !newData.endereco) {
-                const resposta = await openStreetMap(newData.cep)
-                console.log(resposta)
-                newData.endereco = resposta.display_name                
-            }  
+            // if(usuario.cep != newData.cep && !newData.endereco) {
+            //     const resposta = await openStreetMap(newData.cep)
+            //     console.log(resposta)
+            //     newData.endereco = resposta.display_name                
+            // }  
 
-            await usuario.update(newData, {where:{id:id}})
-            res.status(200).json(usuario)  
+            await usuario.update(newData, {where:{id:usuario_id}})
+            return res.status(200).json(usuario)  
             
         } catch (error){
             console.log(error.message)
@@ -137,14 +170,14 @@ class UsuarioController {
             if(!usuario){
                 return res.status(404).json({message: 'Usuario não encontrado'})
             }
-            const count = await Destino.count({         //Não pode ser deletado um usuario se tem algum destino associado
+            const count = await Local.count({         //Não pode ser deletado um usuario se tem algum local associado
                 where: {
                 usuario_id: id
                 }
             })
 
             if (count > 0){
-                return res.status(400).json({message: 'Não é possível deletar este usuario porque tem destinos associados'})
+                return res.status(400).json({message: 'Não é possível deletar este usuario porque tem locais associados'})
             }
 
             usuario.destroy({
@@ -160,6 +193,39 @@ class UsuarioController {
         }        
     }
 
+    async desconectar(req, res) {
+        /*  
+            #swagger.tags = ['Usuario']               
+        */
+                const { userId } = req.body;
+            
+                try {
+                    await Usuario.update({ isLogged: false }, { where: { id: userId } });
+                    return res.status(200).json({ message: "Deslogado com sucesso" });
+                } catch (error) {
+                    console.error("Erro ao deslogar", error);
+                    return res.status(500).json({ message: "Erro interno do servidor" });
+                }
+            }
+
+            async listarAtivos(req, res) {
+                /*  
+                    #swagger.tags = ['Usuario'],
+                    #swagger.summary = 'Listar todos os Usuarios Ativos'                
+                */
+                try {
+                    const usuariosAtivos = await Usuario.findAll({
+                        where: { isLogged: true },
+                        order: [['id', 'ASC']]})
+                        if (usuariosAtivos.length === 0) {
+                            return res.status(200).json({ message: 'Nenhum usuário ativo encontrado.' });
+                        }
+                 res.json(usuariosAtivos)
+                } catch (error) {
+                    console.error(error);
+                      res.status(500).json({message: 'Não possível listar os usuarios ativos' })
+                }
+            }           
 
 }
 

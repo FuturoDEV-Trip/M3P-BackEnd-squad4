@@ -2,7 +2,7 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Viagem365',
+    title: 'TripFlow',
     description: 'API de viagem'
   },
   host: 'localhost:3000',

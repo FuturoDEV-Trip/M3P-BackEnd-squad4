@@ -1,14 +1,18 @@
 const { Router, query } = require('express') 
 const UsuarioController = require('../controllers/UsuarioController')
 const { auth } = require('../middleware/auth')
-const { validarAdicionarUsuario } = require('../middleware/validator')
+const { validarAdicionarUsuario, validarEditarUsuario } = require('../middleware/validator')
 
 
 const usuarioRoutes = new Router()
 
 usuarioRoutes.post('/', validarAdicionarUsuario, UsuarioController.cadastrar)
-usuarioRoutes.get('/', auth, UsuarioController.listar)
-usuarioRoutes.put('/:id', auth, validarAdicionarUsuario, UsuarioController.atualizar)
+usuarioRoutes.get('/logado' , UsuarioController.listarAtivos)
+usuarioRoutes.get('/', UsuarioController.listar)
+usuarioRoutes.put('/', auth, validarEditarUsuario, UsuarioController.atualizar)
 usuarioRoutes.delete('/:id', auth, UsuarioController.deletar)
+usuarioRoutes.get('/:id', UsuarioController.listarUm)
+usuarioRoutes.post('/logout' , UsuarioController.desconectar)
+
 
 module.exports = usuarioRoutes
