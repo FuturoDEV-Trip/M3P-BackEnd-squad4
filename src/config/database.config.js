@@ -12,8 +12,8 @@ module.exports = {
   port: process.env.PORT || 5432,
   dialectOptions: {
     ssl: {
-      rejectUnauthorized: true,
-      require: true
+      rejectUnauthorized: false,
+      // require: false
     }
   },
   pool: {
