@@ -1,5 +1,5 @@
 const { config } = require('dotenv');
-const pg = require("pg");
+const pg = require('pg');
 config();
 
 module.exports = {
@@ -12,8 +12,8 @@ module.exports = {
   port: process.env.PORT || 5432,
   dialectOptions: {
     ssl: {
-      rejectUnauthorized: false,
-      // require: false
+      rejectUnauthorized: true,
+      require: true
     }
   },
   pool: {
