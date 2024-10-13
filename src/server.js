@@ -1,37 +1,53 @@
-const express = require('express');
-const cors = require('cors');
-const { connection } = require("./database/connection");
-const routes = require("./routes/routes");
+const express = require('express') 
+const cors = require('cors') 
+const { connection } = require('./database/connection')
+const routes = require('./routes/routes')
 
 const PORT = process.env.PORT || 3000;
 
 class Server {
-  constructor(server = express()) {
-    this.middlewares(server);
-    this.database();
-    this.initializeServer(server);
-    server.use(routes);
+  constructor(server = express())
+  {
+    this.middlewares(server) 
+    this.database() 
+    server.use(routes)
+    this.initializeServer(server)
   }
 
-  middlewares(server) {
-    server.use(cors({ origin: '*' })); // Middleware para permitir requisições de qualquer origem
-    server.use(express.json()); // Middleware para parsear JSON
+  async middlewares(app) {
+    app.use(cors()) 
+    app.use(express.json()) 
   }
 
-  async database() {
-    try {
-      await connection.authenticate();
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
+  async database(maxRetries = 5) {
+    let retries = 0;
+
+    while (retries < maxRetries) {
+      try {
+        await connection.authenticate(); 
+        console.log('Conexão bem sucedida!');
+        break; 
+      } catch (error) {
+        retries++;
+        console.error(`Tentativa ${retries}: Não foi possível conectar ao banco de dados.`, error);
+
+        if (retries >= maxRetries) {
+          console.error('Número máximo de tentativas alcançado. Falha ao conectar.');
+          throw error;
+        }
+
+        console.log(`Reintentando em 3 segundos...`);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
     }
   }
 
-  initializeServer(server) {
-    server.listen(PORT, () => {
-      console.log(`Servidor rodando em http://localhost:${PORT}`)
-    });
+
+  async initializeServer(app) {
+ 
+    app.listen(PORT_API, () => console.log(`Servidor executando na porta ${PORT_API}`)) 
   }
 }
 
-module.exports = { Server };
+module.exports = { Server } 
+
