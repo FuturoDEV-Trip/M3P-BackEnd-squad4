@@ -3,7 +3,7 @@ const cors = require('cors');
 const { connection } = require("./database/connection");
 const routes = require("./routes/routes");
 
-const PORT_API = process.env.PORT_API || 3000;
+const PORT = process.env.PORT || 3000;
 
 class Server {
   constructor(server = express()) {
@@ -28,8 +28,8 @@ class Server {
   }
 
   initializeServer(server) {
-    server.listen(PORT_API, () => {
-      console.log(`Servidor rodando em http://localhost:${PORT_API}`)
+    server.listen(PORT, () => {
+      console.log(`Servidor rodando em http://localhost:${PORT}`)
     });
   }
 }
