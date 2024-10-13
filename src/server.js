@@ -3,10 +3,9 @@ const cors = require('cors')
 const { connection } = require('./database/connection')
 const routes = require('./routes/routes')
 
-const PORT_API = process.env.PORT_API || 3000 // Porta do servidor
+const PORT = process.env.PORT || 3000;
 
 class Server {
-
   constructor(server = express())
   {
     this.middlewares(server) 
@@ -51,3 +50,4 @@ class Server {
 }
 
 module.exports = { Server } 
+
