@@ -7,10 +7,6 @@ const dashboardRoutes = require("./dashboard.route")
 
 const routes = Router()
 
-router.get('/', (req, res) => {
-    res.json({ message: 'API funcionando!' });
-});
-
 // const swaggerUi = require('swagger-ui-express')
 // const swaggerDocument = require('./swagger.json')
 
