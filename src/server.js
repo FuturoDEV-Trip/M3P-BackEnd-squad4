@@ -3,9 +3,10 @@ const cors = require('cors')
 const { connection } = require('./database/connection')
 const routes = require('./routes/routes')
 
-const PORT = process.env.PORT || 3000;
+const PORT_API = process.env.PORT_API || 3000 // Porta do servidor
 
 class Server {
+
   constructor(server = express())
   {
     this.middlewares(server) 
@@ -42,7 +43,6 @@ class Server {
     }
   }
 
-
   async initializeServer(app) {
  
     app.listen(PORT_API, () => console.log(`Servidor executando na porta ${PORT_API}`)) 
@@ -50,4 +50,3 @@ class Server {
 }
 
 module.exports = { Server } 
-
