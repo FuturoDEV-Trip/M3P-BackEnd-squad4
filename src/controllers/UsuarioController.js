@@ -197,9 +197,10 @@ class UsuarioController {
         /*  
             #swagger.tags = ['Usuario']               
         */
-                const { userId } = req.body;
+              
             
                 try {
+                    const { userId } = req.body;
                     await Usuario.update({ isLogged: false }, { where: { id: userId } });
                     return res.status(200).json({ message: "Deslogado com sucesso" });
                 } catch (error) {
