@@ -39,13 +39,13 @@ class LoginController {
 
             const hashSenha = await compare(password, usuario.password)
 
-            if(hashSenha === false) {
-                return res.status(403).json({message: 'Usuario não encontrado'})
+            if (hashSenha === false) {
+                return res.status(403).json({ message: 'Usuario não encontrado' })
             }
 
             await Usuario.update({ isLogged: true }, { where: { id: usuario.id } });
 
-            const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
+            const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome, isLogged: usuario.isLogged }
 
             const token = sign(payload, process.env.SECRET_JWT, {
                 expiresIn: '24h'
