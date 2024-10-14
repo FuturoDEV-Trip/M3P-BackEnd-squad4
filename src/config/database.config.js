@@ -9,7 +9,7 @@ module.exports = {
   username: process.env.USERNAMEDB,
   password: process.env.PASSWORDDB,
   database: process.env.DATABASE,
-  port: process.env.PORT || 5432,
+  port: process.env.DB_PORT || 5432,
   dialectOptions: {
     ssl: {
       rejectUnauthorized: true,
