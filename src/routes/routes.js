@@ -7,10 +7,10 @@ const dashboardRoutes = require("./dashboard.route")
 
 const routes = Router()
 
-// const swaggerUi = require('swagger-ui-express')
-// const swaggerDocument = require('./swagger.json')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
 
-// routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 routes.use('/usuarios', usuarioRoutes)
 routes.use('/locais', localRoutes)
 routes.use('/login', loginRoutes)
